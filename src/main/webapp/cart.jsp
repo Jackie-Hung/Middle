@@ -18,6 +18,13 @@
     <link rel="stylesheet" type="text/css" href="css/proList.css" />
     <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/cart.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        function initCart(){
+            if($(".th").length==0){
+                $(".table .goOn").show();
+            }
+        }
+    </script>
     <style>
         .header{
             width: 100%;
@@ -39,9 +46,16 @@
             width: 100px;
             height: 120px;
         }
+        .table .th .pro dl dd{
+            position: unset;
+        }
+        .table .th .price{
+            line-height:146px;
+            text-align: center;
+        }
     </style>
 </head>
-<body>
+<body onload="initCart()">
 <div class="header">
     <div class="nav">
         <span class="fl">购物车</span>
@@ -61,8 +75,8 @@
         BookDao dao = new BookDao();
         Map<String,Integer> cartMap = (Map<String,Integer>)session.getAttribute("cartMap");
         if(cartMap!=null){
-        for (Map.Entry<String, Integer> entry : cartMap.entrySet()) {
-            Book book = dao.findBookById(Integer.parseInt(entry.getKey()));
+            for (Map.Entry<String, Integer> entry : cartMap.entrySet()) {
+                Book book = dao.findBookById(Integer.parseInt(entry.getKey()));
     %>
     <div class="th">
         <div class="pro clearfix">
@@ -93,11 +107,11 @@
         <div class="price"><a class="del" href="#2">删除</a></div>
     </div>
 
-<%
+    <%
         }
     }
     else {
-%>
+    %>
     <script>
         $(".goOn").show();
     </script>
@@ -113,7 +127,6 @@
         </label>
         <p class="fl">
             <a href="#">全选</a>
-            <a href="#" class="del">删除</a>
         </p>
         <p class="fr">
             <span>共<small id="sl">0</small>件商品</span>
