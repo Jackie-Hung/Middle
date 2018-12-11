@@ -22,7 +22,8 @@
           }
       </style>
   </head>
-  <body onload="initAJAX()">
+  //默认显示第一页
+  <body onload="initAJAX(),showBook(1)">
   <div class="header">
     <div class="container">
       <div class="row">
